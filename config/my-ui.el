@@ -130,6 +130,18 @@
 ))
 
 
+;; Avy extends VIM style f/F motions
+(use-package avy
+  :ensure avy
+  :config
+  (progn
+    (setq avy-all-windows t)
+    (setq avy-timeout-seconds 0.6)
+    (define-key evil-normal-state-map (kbd "M-a") 'avy-goto-char-timer)
+    (define-key evil-normal-state-map (kbd "M-l") 'avy-goto-line)
+    ))
+
+
 ;; Comp[lete]any[thing] autocompletion framework
 (use-package company
   :ensure company

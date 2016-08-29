@@ -7,3 +7,6 @@ elpa/
 eshell/
 .python-environments/
 .saves/
+/projectile.cache
+/projectile-bookmarks.eld
+/network-security.data
