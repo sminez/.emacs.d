@@ -1,21 +1,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UI and general system settings for my Emacs setup ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq user-full-name "I.D.A-M")
+(setq user-mail-address "innes.morrison@cocoon.life")
 
 ;; Assorted self-explanitory settings
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(show-paren-mode 1)
 (column-number-mode)
+(scroll-bar-mode -1)
+(show-paren-mode 1)
 (visual-line-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq require-final-newline t)
+(setq require-final-newline t
+      scroll-margin 5
+      scroll-conservatively 9999
+      scroll-step 1)
 
 ;; Enable the mouse in terminal mode.
 (xterm-mouse-mode 1)
 
-;; Current theme of choice
-(load-theme 'gruvbox t)
+;; Allow y/n instead of yes/no
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Have rainbow parens if we're in a code buffer
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -42,8 +48,10 @@
 (load custom-file)
 
 ;; UTF-8 by default please
+(setq locale-coding-system 'utf-8)
+(set-language-environment 'utf-8)
 (set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
@@ -117,20 +125,8 @@
       (progn
         ;; Don't start searching for the thing at point by default.
         (setq helm-swoop-pre-input-function (lambda () ()))
-
 	(setq helm-swoop-split-direction 'split-window-vertically)
 	(setq helm-swoop-use-fuzzy-match t)))
-
-    (after 'evil-leader
-	   (evil-leader/set-key
-	     "x" 'helm-M-x
-	     "b" 'helm-mini
-	     "s" 'helm-swoop
-	     "f" 'helm-find
-	     "o" 'helm-find-files
-	     "pf" 'helm-projectile-find-file
-	     "pa" 'helm-projectile-ag
-    ))
 ))
 
 
@@ -141,8 +137,6 @@
   (progn
     (add-hook 'after-init-hook 'global-company-mode)
     (setq company-auto-complete t)
-    ;; (setq company-preview
-    ;;       ((t (:background "burlywood" :foreground "gray18"))))
 ))
 
 ;; Keybinding hints
@@ -152,6 +146,7 @@
 
 ;; SLIME for better lisp interaction
 (use-package elisp-slime-nav
+  :defer t
   :ensure elisp-slime-nav
   :config
   (progn
@@ -161,5 +156,12 @@
       )
     (add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)
 ))
+
+
+;; Load the main theme at the end to prevent clobbering
+(load-theme 'darktooth t)
+;; (load-theme 'gruvbox t)
+;; (load-theme 'material t)
+;; (load-theme 'material-light t)
 
 (provide 'my-ui)

@@ -1,12 +1,47 @@
+;; Not working perfectly yet but this is my main config for
+;; working with python files
+
+(use-package python
+  :init
+  (progn
+    (setq mode-name "Python"
+          tab-width 4))
+  :config
+  (progn
+    (defun py-start-or-switch-to-repl ()
+      "Start and/or switch to the REPL."
+      (interactive)
+      (run-python "python3 -i")
+      (python-shell-switch-to-shell)
+      (evil-insert-state))
+    
+    (eval-after-load 'evil-leader
+      '(progn
+        (evil-leader/set-key-for-mode 'python-mode
+        ;; Python docs and navigation
+        "pD" 'anaconda-mode-find-definitions
+        "p?" 'anaconda-mode-show-doc
+        "pa" 'anaconda-mode-find-assignments
+        ;; Python nose tests
+        "pta" 'nosetests-all
+        "pto" 'nosetests-one
+        "ptm" 'nosetests-module
+        "pts" 'nosetests-suite
+        ;; REPL interaction
+        "pp" 'py-start-or-switch-to-repl
+        "pb" 'python-shell-send-buffer
+        "pd" 'python-shell-send-defun
+        "pv" 'python-shell-send-region))) 
+))
+
+
 (use-package python-mode
   :commands python-mode
   :mode "\\.py\\'"
   :init
   (progn
     (add-to-list 'auto-mode-alist '("/PYDOCS\\'" . help-mode))
-    (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-    (add-to-list 'interpreter-mode-alist '("python3.5" . python-mode))
-  )
+    (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
   :config
   (progn
     (setq py-electric-comment-p nil)
@@ -20,13 +55,43 @@
 ))
 
 
-(use-package company-anaconda
-  :ensure company-anaconda
+(use-package anaconda-mode
+  :ensure anaconda-mode
   :config
   (progn
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-    (setq python-shell-interpreter "python3.5")
 ))
 
+(use-package company-anaconda
+  :ensure company-anaconda
+  :config
+  (progn
+    (eval-after-load "company"
+      '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
+))
   
+(use-package nose
+  :ensure nose
+  :commands (nosetests-one
+             nosetests-pdb-one
+             nosetests-all
+             nosetests-pdb-all
+             nosetests-module
+             nosetests-pdb-module
+             nosetests-suite
+             nosetests-pdb-suite)
+  :config
+  (progn
+    (add-to-list 'nose-project-root-files "setup.cfg")
+    (setq nose-use-verbose nil)))
+
+
+;; Make sure the shell works correctly without warnings about readline
+;; NOTE: This is executed regardless of being in python mode
+(setq python-shell-completion-native-enable nil
+      py-python-command "python3"
+      python-shell-interpreter "python3"
+      python-shell-interpreter-interactive-arg "-i")
+
+(provide 'my-python)

@@ -16,12 +16,6 @@
   :config
   (progn
     (global-git-gutter-mode +1)
-    ;; (setq git-gutter:added
-    ;;       ((t (:inherit default :foreground "medium spring green" :weight bold))))
-    ;; (setq git-gutter:deleted
-    ;;       ((t (:foreground "firebrick" :weight bold))))
-    ;; (setq git-gutter:modified
-    ;;       ((t (:inherit default :foreground "chocolate" :weight bold))))
 ))
 
 (provide 'my-git)
