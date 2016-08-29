@@ -18,4 +18,13 @@
     (global-git-gutter-mode +1)
 ))
 
+
+(use-package projectile
+  :ensure projectile
+  :config
+  (progn
+    (projectile-global-mode +1)
+    (setq projectile-enable-caching t)
+))
+
 (provide 'my-git)

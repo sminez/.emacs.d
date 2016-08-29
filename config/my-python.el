@@ -19,19 +19,19 @@
       '(progn
         (evil-leader/set-key-for-mode 'python-mode
         ;; Python docs and navigation
-        "pD" 'anaconda-mode-find-definitions
-        "p?" 'anaconda-mode-show-doc
-        "pa" 'anaconda-mode-find-assignments
+        ",d" 'anaconda-mode-find-definitions
+        ",?" 'anaconda-mode-show-doc
+        ",a" 'anaconda-mode-find-assignments
         ;; Python nose tests
-        "pta" 'nosetests-all
-        "pto" 'nosetests-one
-        "ptm" 'nosetests-module
-        "pts" 'nosetests-suite
+        ",ta" 'nosetests-all
+        ",to" 'nosetests-one
+        ",tm" 'nosetests-module
+        ",ts" 'nosetests-suite
         ;; REPL interaction
-        "pp" 'py-start-or-switch-to-repl
-        "pb" 'python-shell-send-buffer
-        "pd" 'python-shell-send-defun
-        "pv" 'python-shell-send-region))) 
+        ",p" 'py-start-or-switch-to-repl
+        ",b" 'python-shell-send-buffer
+        ",f" 'python-shell-send-defun
+        ",v" 'python-shell-send-region))) 
 ))
 
 
