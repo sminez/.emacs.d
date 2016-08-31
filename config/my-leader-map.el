@@ -61,7 +61,7 @@
   ;; Utilities
   "D" 'hydra-docker/body
   "ue" 'elisp-slime-nav-describe-elisp-thing-at-point
-  "ut" 'multi-term-dedicated-open
+  "ut" '(lambda () (interactive) (multi-term-dedicated-toggle) (evil-insert-state))
   ;; I use this so often it sits on the top level
   ";" 'evilnc-comment-or-uncomment-lines
 )

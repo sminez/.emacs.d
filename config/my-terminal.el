@@ -3,7 +3,8 @@
   :ensure multi-term
   :config
   (progn
-    (setq multi-term-program "/usr/bin/zsh")
+    (setq system-uses-terminfo nil)
+    (setq multi-term-program "/bin/zsh")
     (setq multi-term-scroll-to-bottom-on-output nil)
     (setq multi-term-dedicated-select-after-open-p t)
 ))
