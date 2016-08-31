@@ -34,6 +34,8 @@
 (require 'my-terminal)
 (require 'my-evil-vim)
 (require 'my-python)
+(require 'my-utils)
+(require 'my-hydras)
 (require 'my-leader-map)
 
 ;; Export this as the init function

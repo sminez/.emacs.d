@@ -24,11 +24,12 @@
   ;; Buffers
   "bb" 'helm-mini
   "bn" 'evil-buffer
-  "bd" 'buffer-kill
+  "bd" 'kill-buffer
   ;; Search and Docs
   "sa" 'helm-apt
   "sf" 'helm-find
   "sg" 'helm-ag
+  "sr" 'helm-grep
   "si" 'helm-semantic-or-imenu
   "ss" 'helm-swoop
   ;; Selections
@@ -53,33 +54,20 @@
   "gp" 'magit-push
   "gu" 'magit-pull
   ;; Project navigation
+  "P"  'hydra-projectile/body  ; This gives an extended menu 
   "pf" 'helm-projectile-find-file
   "pP" 'helm-projectile-switch-project
   "pa" 'helm-projectile-ag
   ;; Utilities
-  "ue" 'elisp-slme-nav-describe-elisp-thing-at-point
+  "D" 'hydra-docker/body
+  "ue" 'elisp-slime-nav-describe-elisp-thing-at-point
   "ut" 'multi-term-dedicated-open
   ;; I use this so often it sits on the top level
   ";" 'evilnc-comment-or-uncomment-lines
 )
 
-;;   "dw" 'evil-window-delete
-;;   "db" 'kill-buffer
-;;   ";" 'evilnc-comment-or-uncomment-lines
-;;   "t" 'multi-term-dedicated-open
-;;   ;; Create and navigate splits
-;;   "/" 'split-window-right
-;;   ;; Git diffs and commits
-;;   "gd" 'magit-diff
-;;   "gs" 'magit-status
-;;   "gc" 'magit-commit
-;;   "gb" 'magit-blame
-;;   "gl" 'magit-log
-;;   "gp" 'magit-push
-;;   "gu" 'magit-pull
-;;   ;; Project navigation
-;;   "pf" 'helm-projectile-find-file
-;;   "pa" 'helm-projectile-ag
-;; )
+;; Bindings didn't seem to works in my-ui.el
+(define-key evil-normal-state-map (kbd "M-a") 'avy-goto-char-timer)
+(define-key evil-normal-state-map (kbd "M-l") 'avy-goto-line)
 
 (provide 'my-leader-map)
