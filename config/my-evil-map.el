@@ -1,8 +1,6 @@
-;; All of my leader bindings so they can be loaded at the end
+;; All of my key bindings so they can be loaded at the end
 
-;; RETHINK::
-;; Move things into a kind of namespace based on the first letter:
-;; (Totally stolen from Spacemacs)
+;; Namespacing - (Totally stolen from Spacemacs!)
 ;; , -> major mode (defined in the individual my-<major>.el files
 ;; f -> [f]iles
 ;; b -> [b]uffers
@@ -14,6 +12,7 @@
 ;; t -> [t]oggles
 ;; u -> [u]utilities
 
+;; Leader keymap
 (evil-leader/set-key
   ;; Show key bindings and commands
   "<SPC>" 'which-key-show-top-level
@@ -62,12 +61,15 @@
   "D" 'hydra-docker/body
   "ue" 'elisp-slime-nav-describe-elisp-thing-at-point
   "ut" '(lambda () (interactive) (multi-term-dedicated-toggle) (evil-insert-state))
+  "uc" 'my/toggle-theme
   ;; I use this so often it sits on the top level
   ";" 'evilnc-comment-or-uncomment-lines
 )
 
-;; Bindings didn't seem to works in my-ui.el
+;; Normal mode keymap
 (define-key evil-normal-state-map (kbd "M-a") 'avy-goto-char-timer)
 (define-key evil-normal-state-map (kbd "M-l") 'avy-goto-line)
+(define-key evil-normal-state-map (kbd "t") 'my/evil-insert-line-below)
+(define-key evil-normal-state-map (kbd "T") 'my/evil-insert-line-above)
 
-(provide 'my-leader-map)
+(provide 'my-evil-map)

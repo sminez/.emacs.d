@@ -16,8 +16,9 @@
 (require 'package)
 
 ;; Populate the package archive
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")
+(setq package-archives '(("org"       . "http://orgmode.org/elpa/")
+                         ("melpa"     . "http://melpa.org/packages/")
+                         ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 (setq package-enable-at-startup nil)
@@ -34,9 +35,11 @@
 (require 'my-terminal)
 (require 'my-evil-vim)
 (require 'my-python)
+(require 'my-orgmode)
 (require 'my-utils)
+(require 'my-helpers)
 (require 'my-hydras)
-(require 'my-leader-map)
+(require 'my-evil-map)
 
 ;; Export this as the init function
 (provide 'init)

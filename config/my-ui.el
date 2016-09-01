@@ -11,7 +11,8 @@
 (scroll-bar-mode -1)
 (show-paren-mode 1)
 (visual-line-mode 1)
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil
+              tab-width 4)
 (setq require-final-newline t
       scroll-margin 5
       scroll-conservatively 9999
@@ -25,6 +26,19 @@
 
 ;; Have rainbow parens if we're in a code buffer
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; Highlight todos
+(use-package hl-todo
+  :ensure hl-todo
+  :config
+  (progn
+    (global-hl-todo-mode)
+    (setq hl-todo-keyword-faces
+          '(("TODO" . hl-todo)
+            ("NOTE" . hl-todo)))
+    (with-eval-after-load 'hl-todo
+      (hl-todo-set-regexp))
+))
 
 ;; Enable transparency and increases it when Emacs looses focus
 (set-frame-parameter (selected-frame) 'alpha '(95 . 60))
@@ -58,6 +72,7 @@
 ;; Vim-like relative numbers
 (use-package linum-relative
   :ensure linum-relative
+  :diminish linum-relative
   :config
   (progn
     (linum-relative-global-mode)
@@ -67,6 +82,7 @@
 ;; Powerline style info bare at the bottom
 (use-package spaceline
   :ensure spaceline
+  :diminish spaceline
   :config
   (progn
     (require 'spaceline-config)
@@ -80,12 +96,50 @@
 ;; Keybinding hints
 (use-package which-key
   :ensure which-key
-  :config (which-key-mode))
+  :diminish which-key
+  :config
+  (progn
+    (setq which-key-key-replacement-alist
+    '(("<\\([[:alnum:]-]+\\)>" . "\\1")
+      ("left"                  . "◀")
+      ("right"                 . "▶")
+      ("up"                    . "▲")
+      ("down"                  . "▼")
+      ("delete"                . "DEL") ; delete key
+      ("\\`DEL\\'"             . "BS") ; backspace key
+      ("next"                  . "PgDn")
+      ("prior"                 . "PgUp")))
 
-;;Load the main theme at the end to prevent clobbering
-(load-theme 'darktooth t)
-;; (load-theme 'gruvbox t)
-;; (load-theme 'material t)
-;; (load-theme 'material-light t)
+    ;; List of "special" keys for which a KEY is displayed as just
+    ;; K but with "inverted video" face... not sure I like this.
+    (setq which-key-special-keys '("RET" "DEL" ; delete key
+                                   "ESC" "BS" ; backspace key
+                                   "SPC" "TAB"))
+
+    ;; Replacements for how part or whole of FUNCTION is replaced:
+    (setq which-key-description-replacement-alist
+          '(("Prefix Command" . "prefix")
+            ("\\`projectile-" . "𝓟/")
+            ("\\`org-babel-"  . "ob/")))
+
+    (which-key-mode 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Load the main theme at the end to prevent clobbering ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package white-sand-theme
+  :ensure white-sand-theme)
+
+(use-package darktooth-theme
+  :ensure darktooth-theme)
+
+(use-package base16-theme
+  :ensure base16-theme)
+
+(load-theme 'white-sand t)
+
+;; Variables that are used in my/toggle-theme
+(defvar *my-themes* '(white-sand darktooth base16-eighties))
+(defvar *my-current-theme* 'white-sand)
 
 (provide 'my-ui)

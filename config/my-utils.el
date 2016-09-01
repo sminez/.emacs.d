@@ -53,6 +53,7 @@
 ;; Avy extends VIM style f/F t/T motions
 (use-package avy
   :ensure avy
+  :diminish avy
   :config
   (progn
     (setq avy-all-windows t)
@@ -63,12 +64,14 @@
 ;; Hydra `micro-states` allow you to make a temporary mode
 ;; Note: Hydras are defined in the my-hydras.el file
 (use-package hydra
-  :ensure hydra)
+  :ensure hydra
+  :diminish hydra)
 
 
 ;; Comp[lete]any[thing] autocompletion framework
 (use-package company
   :ensure company
+  :diminish company
   :init
   (progn
     (add-hook 'after-init-hook 'global-company-mode)
@@ -89,7 +92,8 @@
 
 
 (use-package docker
-  :ensure docker)
+  :ensure docker
+  :diminish docker)
 
 
 (provide 'my-utils)

@@ -17,18 +17,19 @@
 ;; Evil mode - Vim inside Emacs
 (use-package evil
   :ensure evil
+  :init (setq evil-want-C-i-jump nil)
   :config
   (progn
     (evil-mode 1)
-    (setq evil-search-module 'ag)
-    (setq evil-magic 'very-magic)
-    (setq evil-want-fine-undo t)
-    (setq evil-want-change-word-to-end t)
-
-    (use-package evil-nerd-commenter
-      :ensure evil-nerd-commenter
-      :commands (evilnc-comment-or-uncomment-lines))
+    (setq evil-search-module 'ag
+          evil-magic 'very-magic
+          evil-want-fine-undo t
+          evil-want-change-word-to-end t)
 ))
+
+(use-package evil-nerd-commenter
+    :ensure evil-nerd-commenter
+    :commands (evilnc-comment-or-uncomment-lines))
 
 
 ;; Normal mode key bindings
