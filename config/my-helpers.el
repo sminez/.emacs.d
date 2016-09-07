@@ -23,13 +23,13 @@ the current state and point position."
 
 (defadvice load-theme (before theme-dont-propagate activate)
   "Disable theme before loading new one."
-  (mapc #'disable-theme custom-enabled-themes))
+  (disable-theme *my-current-theme*))
 
 (defun my/next-theme (theme)
   (if (eq theme 'default)
       (disable-theme *my-current-theme*)
     (progn
-      (load-theme theme)
+      (load-theme theme t)
       (spaceline-compile))
   (setq *my-current-theme* theme)))
 

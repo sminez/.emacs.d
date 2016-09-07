@@ -47,10 +47,8 @@
     (setq py-electric-comment-p nil)
     (setq py-max-help-buffer-p nil)
     (setq py-electric-comment-add-space-p nil)
-    (setq py-tab-indent nil)
     (setq py-smart-indentation t)
     (setq py-return-key 'py-newline-and-indent)
-    (setq py-complete-function nil)
     (setq py-empty-line-closes-p nil)
 ))
 
@@ -68,7 +66,7 @@
   :config
   (progn
     (eval-after-load "company"
-      '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
+      '(add-to-list 'company-backends 'company-anaconda))
 ))
   
 (use-package nose

@@ -35,6 +35,7 @@
 (require 'my-terminal)
 (require 'my-evil-vim)
 (require 'my-python)
+(require 'my-clojure)
 (require 'my-orgmode)
 (require 'my-utils)
 (require 'my-helpers)
