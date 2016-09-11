@@ -4,10 +4,10 @@
   :config
   (progn
     (setq system-uses-terminfo t)
-    (setq multi-term-program "/bin/bash")
+    (setq multi-term-program "/bin/zsh")
     (setq multi-term-scroll-to-bottom-on-output t)
     (setq multi-term-dedicated-select-after-open-p t)
-    (add-hook 'shell-mode-hook ansi-color-for-comint-mode)
+    ;; (add-hook 'term-mode-hook ansi-color-for-comint-mode)
 ))
 
 (provide 'my-terminal)

@@ -41,8 +41,8 @@
 ))
 
 ;; Enable transparency and increases it when Emacs looses focus
-(set-frame-parameter (selected-frame) 'alpha '(95 . 60))
-(add-to-list 'default-frame-alist '(alpha . (95 . 60)))
+;; (set-frame-parameter (selected-frame) 'alpha '(95 . 60))
+;; (add-to-list 'default-frame-alist '(alpha . (95 . 60)))
 
 ;; Disable the annoying splash screen
 (setq inhibit-splash-screen t
@@ -133,13 +133,14 @@
 (use-package darktooth-theme
   :ensure darktooth-theme)
 
-(use-package base16-theme
-  :ensure base16-theme)
+;;; I can't work out if I like the base16 themes or not...
+;; (use-package base16-theme
+;;   :ensure base16-theme)
 
-(load-theme 'base16-mexico-light t)
-(defvar *my-current-theme* 'base16-mexico-light)
+(load-theme 'white-sand)
+(defvar *my-current-theme* 'white-sand)
 
 ;; Variables that are used in my/toggle-theme
-(defvar *my-themes* '(white-sand darktooth base16-mexico-light base16-eighties))
+(defvar *my-themes* '(white-sand darktooth)) ;;base16-mexico-light base16-eighties))
 
 (provide 'my-ui)

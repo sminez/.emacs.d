@@ -42,5 +42,8 @@
 (require 'my-hydras)
 (require 'my-evil-map)
 
+;; Start up a server so that we can do quick edits on the command line
+(server-start)
+
 ;; Export this as the init function
 (provide 'init)

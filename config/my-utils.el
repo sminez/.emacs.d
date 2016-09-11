@@ -25,6 +25,10 @@
       (use-package helm-projectile
         :ensure helm-projectile))
 
+    (eval-after-load 'company
+      (use-package helm-company
+        :ensure helm-company))
+
     (defun helm-jump ()
       "Find files with helm, but be smart about buffers and recent files."
       (interactive)

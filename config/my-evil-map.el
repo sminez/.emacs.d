@@ -71,5 +71,6 @@
 (define-key evil-normal-state-map (kbd "M-l") 'avy-goto-line)
 (define-key evil-normal-state-map (kbd "t") 'my/evil-insert-line-below)
 (define-key evil-normal-state-map (kbd "T") 'my/evil-insert-line-above)
+(define-key evil-insert-state-map (kbd "M-;") 'helm-company)
 
 (provide 'my-evil-map)
