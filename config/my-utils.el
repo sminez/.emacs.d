@@ -2,6 +2,11 @@
 ;; General utilities ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Real time linting
+(use-package flycheck
+  :ensure flycheck
+  :init (global-flycheck-mode))
+
 ;; Helm fuzzy match / narrowing framework
 (use-package helm
   :ensure helm
@@ -94,6 +99,8 @@
     (add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)
 ))
 
+(use-package paredit
+  :ensure paredit)
 
 (use-package docker
   :ensure docker

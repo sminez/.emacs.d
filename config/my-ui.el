@@ -11,6 +11,7 @@
 (scroll-bar-mode -1)
 (show-paren-mode 1)
 (visual-line-mode 1)
+(blink-cursor-mode 0)
 (setq-default indent-tabs-mode nil
               tab-width 4)
 (setq require-final-newline t
@@ -40,6 +41,10 @@
       (hl-todo-set-regexp))
 ))
 
+;; Provide syntax highlighting for markdown files
+(use-package markdown-mode
+  :ensure markdown-mode)
+
 ;; Enable transparency and increases it when Emacs looses focus
 ;; (set-frame-parameter (selected-frame) 'alpha '(95 . 60))
 ;; (add-to-list 'default-frame-alist '(alpha . (95 . 60)))
@@ -56,6 +61,7 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq auto-save-file-name-transforms
       `((".*" ,my-auto-save-folder t)))
+(setq create-lockfiles nil)
 
 ;; Store auto-gen config stuff in its own file
 (setq custom-file "~/.emacs.d/custom.el")
@@ -119,7 +125,7 @@
     ;; Replacements for how part or whole of FUNCTION is replaced:
     (setq which-key-description-replacement-alist
           '(("Prefix Command" . "prefix")
-            ("\\`projectile-" . "𝓟/")
+            ("\\`projectile-" . "ρ/")
             ("\\`org-babel-"  . "ob/")))
 
     (which-key-mode 1)))
@@ -130,17 +136,20 @@
 (use-package white-sand-theme
   :ensure white-sand-theme)
 
-(use-package darktooth-theme
-  :ensure darktooth-theme)
+;; (use-package darktooth-theme
+;;   :ensure darktooth-theme)
 
-;;; I can't work out if I like the base16 themes or not...
+(use-package gruvbox-theme
+  :ensure gruvbox-theme)
+
+;; I can't work out if I like the base16 themes or not...
 ;; (use-package base16-theme
 ;;   :ensure base16-theme)
 
-(load-theme 'white-sand)
-(defvar *my-current-theme* 'white-sand)
+(defvar *my-current-theme* 'gruvbox)
+(load-theme *my-current-theme*)
 
 ;; Variables that are used in my/toggle-theme
-(defvar *my-themes* '(white-sand darktooth)) ;;base16-mexico-light base16-eighties))
+(defvar *my-themes* '(white-sand gruvbox)) ;;darktooth base16-mexico-light))
 
 (provide 'my-ui)

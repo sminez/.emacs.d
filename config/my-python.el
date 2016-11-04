@@ -5,7 +5,10 @@
   :init
   (progn
     (setq mode-name "Python"
-          tab-width 4))
+          tab-width 4)
+    (set-fill-column 80)
+    (hl-todo-mode 1)
+    (add-hook 'before-save-hook 'delete-trailing-whitespace))
   :config
   (progn
     (defun py-start-or-switch-to-repl ()
@@ -14,7 +17,9 @@
       (run-python "python3 -i")
       (python-shell-switch-to-shell)
       (evil-insert-state))
-    
+    (setq flycheck-checker 'python-flake8
+          flycheck-checker-error-threshold 900)
+
     (eval-after-load 'evil-leader
       '(progn
         (evil-leader/set-key-for-mode 'python-mode
@@ -31,7 +36,7 @@
         ",p" 'py-start-or-switch-to-repl
         ",b" 'python-shell-send-buffer
         ",f" 'python-shell-send-defun
-        ",v" 'python-shell-send-region))) 
+        ",v" 'python-shell-send-region)))
 ))
 
 
@@ -68,7 +73,7 @@
     (eval-after-load "company"
       '(add-to-list 'company-backends 'company-anaconda))
 ))
-  
+
 (use-package nose
   :ensure nose
   :commands (nosetests-one
