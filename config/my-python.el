@@ -17,8 +17,8 @@
       (run-python "python3 -i")
       (python-shell-switch-to-shell)
       (evil-insert-state))
-    (setq flycheck-checker 'python-flake8
-          flycheck-checker-error-threshold 900)
+    ;; (setq flycheck-checker 'python-flake8
+    ;;       flycheck-checker-error-threshold 900)
 
     (eval-after-load 'evil-leader
       '(progn
@@ -55,6 +55,8 @@
     (setq py-smart-indentation t)
     (setq py-return-key 'py-newline-and-indent)
     (setq py-empty-line-closes-p nil)
+    (eval-after-load "company"
+      '(add-to-list 'company-backends 'company-anaconda))
 ))
 
 
@@ -68,11 +70,7 @@
 
 (use-package company-anaconda
   :ensure company-anaconda
-  :config
-  (progn
-    (eval-after-load "company"
-      '(add-to-list 'company-backends 'company-anaconda))
-))
+)
 
 (use-package nose
   :ensure nose

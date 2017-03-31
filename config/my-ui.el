@@ -122,31 +122,24 @@
                                    "ESC" "BS" ; backspace key
                                    "SPC" "TAB"))
 
-    ;; Replacements for how part or whole of FUNCTION is replaced:
-    (setq which-key-description-replacement-alist
-          '(("Prefix Command" . "prefix")
-            ("\\`projectile-" . "ρ/")
-            ("\\`org-babel-"  . "ob/")))
-
     (which-key-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Load the main theme at the end to prevent clobbering ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package white-sand-theme
-  :ensure white-sand-theme)
+;; (use-package white-sand-theme
+;;   :ensure white-sand-theme)
 
 ;; (use-package darktooth-theme
 ;;   :ensure darktooth-theme)
 
-(use-package gruvbox-theme
-  :ensure gruvbox-theme)
+;; (use-package gruvbox-theme
+;;   :ensure gruvbox-theme)
 
-;; I can't work out if I like the base16 themes or not...
 ;; (use-package base16-theme
 ;;   :ensure base16-theme)
 
-(defvar *my-current-theme* 'gruvbox)
+(defvar *my-current-theme* 'white-sand)
 (load-theme *my-current-theme*)
 
 ;; Variables that are used in my/toggle-theme
