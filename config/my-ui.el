@@ -139,10 +139,10 @@
 ;; (use-package base16-theme
 ;;   :ensure base16-theme)
 
-(defvar *my-current-theme* 'white-sand)
+(defvar *my-current-theme* 'base16-eighties)
 (load-theme *my-current-theme*)
 
 ;; Variables that are used in my/toggle-theme
-(defvar *my-themes* '(white-sand gruvbox)) ;;darktooth base16-mexico-light))
+(defvar *my-themes* '(white-sand base16-eighties)) ;;darktooth base16-mexico-light))
 
 (provide 'my-ui)

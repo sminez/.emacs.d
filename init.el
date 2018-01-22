@@ -18,6 +18,7 @@
 ;; Populate the package archive
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("melpa"     . "http://melpa.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
@@ -36,6 +37,7 @@
 (require 'my-evil-vim)
 (require 'my-python)
 (require 'my-clojure)
+(require 'my-haskell)
 (require 'my-orgmode)
 (require 'my-utils)
 (require 'my-helpers)

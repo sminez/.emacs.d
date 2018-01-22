@@ -18,7 +18,9 @@
   "<SPC>" 'which-key-show-top-level
   "x" 'helm-M-x
   ;; Files
+  "fg" 'helm-do-grep-ag
   "fo" 'helm-find-files
+  "fr" 'helm-recentf
   "fs" 'save-buffer
   ;; Buffers
   "bb" 'helm-mini
@@ -53,7 +55,7 @@
   "gp" 'magit-push
   "gu" 'magit-pull
   ;; Project navigation
-  "P"  'hydra-projectile/body  ; This gives an extended menu 
+  "P"  'hydra-projectile/body  ; This gives an extended menu
   "pf" 'helm-projectile-find-file
   "pP" 'helm-projectile-switch-project
   "pa" 'helm-projectile-ag
