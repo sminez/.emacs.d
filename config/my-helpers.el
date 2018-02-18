@@ -21,9 +21,9 @@ the current state and point position."
 ;; Enable cycling of themes ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defadvice load-theme (before theme-dont-propagate activate)
-  "Disable theme before loading new one."
-  (disable-theme *my-current-theme*))
+;; (defadvice load-theme (before theme-dont-propagate activate)
+;;   "Disable theme before loading new one."
+;;   (disable-theme *my-current-theme*))
 
 (defun my/next-theme (theme)
   (if (eq theme 'default)

@@ -2,7 +2,7 @@
 ;; UI and general system settings for my Emacs setup ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq user-full-name "I.D.A-M")
-(setq user-mail-address "innes.morrison@cocoon.life")
+(setq user-mail-address "innesdmorrison@gmail.com")
 
 ;; Assorted self-explanitory settings
 (menu-bar-mode -1)
@@ -12,9 +12,13 @@
 (show-paren-mode 1)
 (visual-line-mode 1)
 (blink-cursor-mode 0)
+;; (set-default-font "ProFontWindows Nerd Font 14")
+(set-face-attribute 'default nil :height 150)
 (setq-default indent-tabs-mode nil
               tab-width 4)
-(setq require-final-newline t
+(setq select-enable-clipboard t
+      interprogram-paste-function 'x-cut-buffer-or-selection-value
+      require-final-newline t
       scroll-margin 5
       scroll-conservatively 9999
       scroll-step 1)
@@ -26,6 +30,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Have rainbow parens if we're in a code buffer
+(use-package rainbow-delimiters
+    :ensure rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; Highlight todos
@@ -36,14 +42,20 @@
     (global-hl-todo-mode)
     (setq hl-todo-keyword-faces
           '(("TODO" . hl-todo)
-            ("NOTE" . hl-todo)))
+            ("NOTE" . hl-todo)
+            ("XXX" . hl-todo)))
     (with-eval-after-load 'hl-todo
       (hl-todo-set-regexp))
 ))
 
 ;; Provide syntax highlighting for markdown files
 (use-package markdown-mode
-  :ensure markdown-mode)
+  :ensure markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 ;; Enable transparency and increases it when Emacs looses focus
 ;; (set-frame-parameter (selected-frame) 'alpha '(95 . 60))
@@ -99,22 +111,50 @@
     (spaceline-compile)
 ))
 
+;; Tab bar :: config from gfanton
+(use-package tabbar :disabled t
+  :ensure t
+  :config
+  ;; Change padding of the tabs
+  ;; we also need to set separator to avoid overlapping tabs by highlighted tabs
+  (custom-set-variables
+   '(tabbar-separator (quote (1.0))))
+
+  ;; adding spaces
+  (defun tabbar-buffer-tab-label (tab)
+    "Return a label for TAB.
+That is, a string used to represent it on the tab bar."
+    (let ((label  (if tabbar--buffer-show-groups
+                      (format " [%s] " (tabbar-tab-tabset tab))
+                    (format " %s " (tabbar-tab-value tab)))))
+      ;; Unless the tab bar auto scrolls to keep the selected tab
+      ;; visible, shorten the tab label to keep as many tabs as possible
+      ;; in the visible area of the tab bar.
+      (if tabbar-auto-scroll-flag
+          label
+        (tabbar-shorten
+         label (max 1 (/ (window-width)
+                         (length (tabbar-view
+                                  (tabbar-current-tabset)))))))))
+  (tabbar-mode t))
+
+
 ;; Keybinding hints
 (use-package which-key
   :ensure which-key
   :diminish which-key
   :config
   (progn
-    (setq which-key-key-replacement-alist
-    '(("<\\([[:alnum:]-]+\\)>" . "\\1")
-      ("left"                  . "◀")
-      ("right"                 . "▶")
-      ("up"                    . "▲")
-      ("down"                  . "▼")
-      ("delete"                . "DEL") ; delete key
-      ("\\`DEL\\'"             . "BS") ; backspace key
-      ("next"                  . "PgDn")
-      ("prior"                 . "PgUp")))
+    ;; (setq which-key-replacement-alist
+    ;; '(("<\\([[:alnum:]-]+\\)>" . "\\1")
+    ;;   ("left"                  . "◀")
+    ;;   ("right"                 . "▶")
+    ;;   ("up"                    . "▲")
+    ;;   ("down"                  . "▼")
+    ;;   ("delete"                . "DEL") ; delete key
+    ;;   ("\\`DEL\\'"             . "BS") ; backspace key
+    ;;   ("next"                  . "PgDn")
+    ;;   ("prior"                 . "PgUp")))
 
     ;; List of "special" keys for which a KEY is displayed as just
     ;; K but with "inverted video" face... not sure I like this.
@@ -127,22 +167,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Load the main theme at the end to prevent clobbering ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package autothemer
+  :ensure autothemer
+)
+
 ;; (use-package white-sand-theme
-;;   :ensure white-sand-theme)
+;;    :ensure white-sand-theme)
 
 ;; (use-package darktooth-theme
-;;   :ensure darktooth-theme)
+;;    :ensure darktooth-theme)
 
-;; (use-package gruvbox-theme
-;;   :ensure gruvbox-theme)
+(use-package gruvbox-theme
+   :ensure gruvbox-theme)
 
 ;; (use-package base16-theme
 ;;   :ensure base16-theme)
 
-(defvar *my-current-theme* 'base16-eighties)
+(defvar *my-current-theme* 'gruvbox-dark-soft)
+
 (load-theme *my-current-theme*)
 
 ;; Variables that are used in my/toggle-theme
-(defvar *my-themes* '(white-sand base16-eighties)) ;;darktooth base16-mexico-light))
+(defvar *my-themes* '(gruvbox-dark-soft)) ;;darktooth base16-mexico-light))
 
 (provide 'my-ui)

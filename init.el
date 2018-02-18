@@ -1,14 +1,19 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Just getting started with this at the moment but have a look at this:   ;;
-;; https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html ;;
-;;                                                                         ;;
-;; more here: https://github.com/nathantypanski/emacs.d/tree/master/config ;;
-;;                                                                         ;;
-;; Particularly the section on Use-Package for auto installing missing     ;;
-;; packages when setting things up for the first time!                     ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Package --- Summary
+;;; init.el
 
-;; Pull in my config files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Commentary:
+;; Just getting started with this at the moment but have a look at this:
+;; https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
+;;
+;; more here: https://github.com/nathantypanski/emacs.d/tree/master/config
+;;
+;; Particularly the section on Use-Package for auto installing missing
+;; packages when setting things up for the first time!
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Code:
+;; Pull in my individual config files
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 
 ;; Set up the package manager and configure autoloading of packages
@@ -31,7 +36,6 @@
 (require 'use-package)
 
 ;; Load my config files
-(require 'my-ui)
 (require 'my-git)
 (require 'my-terminal)
 (require 'my-evil-vim)
@@ -43,9 +47,11 @@
 (require 'my-helpers)
 (require 'my-hydras)
 (require 'my-evil-map)
+(require 'my-ui)
 
 ;; Start up a server so that we can do quick edits on the command line
-(server-start)
+;; (server-start)
 
 ;; Export this as the init function
 (provide 'init)
+;;; init.el ends here

@@ -27,9 +27,10 @@
   "bn" 'evil-buffer
   "bd" 'kill-buffer
   ;; Search and Docs
-  "sa" 'helm-apt
+  "sa" 'avy-goto-char-timer
   "sf" 'helm-find
   "sg" 'helm-ag
+  "sl" 'avy-goto-line
   "sr" 'helm-grep
   "si" 'helm-semantic-or-imenu
   "ss" 'helm-swoop
@@ -74,5 +75,9 @@
 (define-key evil-normal-state-map (kbd "t") 'my/evil-insert-line-below)
 (define-key evil-normal-state-map (kbd "T") 'my/evil-insert-line-above)
 (define-key evil-insert-state-map (kbd "M-;") 'helm-company)
+
+;; Global bindings
+;; C-x C-e evaluates the last sexp. This does the whole buffer.
+(global-set-key (kbd "C-c C-b") 'eval-buffer)
 
 (provide 'my-evil-map)

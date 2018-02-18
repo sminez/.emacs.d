@@ -8,12 +8,18 @@
   :init (global-flycheck-mode))
 
 ;; Helm fuzzy match / narrowing framework
+;; Look at this for more ideas
+;; https://github.com/syl20bnr/spacemacs/blob/4bb4cb46968e5bbb98fffd480c8c822269fced4f/layers/%2Bcompletion/helm/packages.el
 (use-package helm
   :ensure helm
   :config
   (progn
     (setq helm-buffers-fuzzy-matching t)
-    (setq helm-split-window-in-side-p nil)
+    (setq helm-split-window-inside-p nil)
+    (setq helm-mode 1)
+    (setq helm-autoresize-mode 1)
+    (setq helm-ag-fuzzy-match t)
+    (setq helm-autoresize-mode t)
     (setq helm-adaptive-history-file "~/.emacs.d/helm-adapative-history")
     ; rebind tab to do persistent action
     (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
@@ -22,8 +28,6 @@
     ; list actions using C-z
     (define-key helm-map (kbd "C-z") 'helm-select-action)
 
-    (helm-mode 1)
-    (helm-autoresize-mode 1)
     (setq helm-quick-update t)
 
     (eval-after-load 'projectile
@@ -53,9 +57,12 @@
       :config
       (progn
         ;; Don't start searching for the thing at point by default.
-        (setq helm-swoop-pre-input-function (lambda () ()))
-	(setq helm-swoop-split-direction 'split-window-vertically)
-	(setq helm-swoop-use-fuzzy-match t)))
+        (setq helm-swoop-pre-input-function (lambda () ""))
+        (setq helm-swoop-split-direction 'split-window-vertically)
+        (setq helm-swoop-use-fuzzy-match t)))
+
+    (use-package helm-ag
+      :ensure helm-ag)
 ))
 
 
