@@ -2,7 +2,7 @@
 ;; UI and general system settings for my Emacs setup ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq user-full-name "I.D.A-M")
-(setq user-mail-address "innesdmorrison@gmail.com")
+(setq user-mail-address "innes.andersonmorrison@gmail.com")
 
 ;; Assorted self-explanitory settings
 (menu-bar-mode -1)
@@ -12,7 +12,7 @@
 (show-paren-mode 1)
 (visual-line-mode 1)
 (blink-cursor-mode 0)
-;; (set-default-font "ProFontWindows Nerd Font 14")
+(set-frame-font "TerminessTTF Nerd Font 16")
 (set-face-attribute 'default nil :height 150)
 (setq-default indent-tabs-mode nil
               tab-width 4)
@@ -110,34 +110,6 @@
     (spaceline-toggle-minor-modes-off)
     (spaceline-compile)
 ))
-
-;; Tab bar :: config from gfanton
-(use-package tabbar :disabled t
-  :ensure t
-  :config
-  ;; Change padding of the tabs
-  ;; we also need to set separator to avoid overlapping tabs by highlighted tabs
-  (custom-set-variables
-   '(tabbar-separator (quote (1.0))))
-
-  ;; adding spaces
-  (defun tabbar-buffer-tab-label (tab)
-    "Return a label for TAB.
-That is, a string used to represent it on the tab bar."
-    (let ((label  (if tabbar--buffer-show-groups
-                      (format " [%s] " (tabbar-tab-tabset tab))
-                    (format " %s " (tabbar-tab-value tab)))))
-      ;; Unless the tab bar auto scrolls to keep the selected tab
-      ;; visible, shorten the tab label to keep as many tabs as possible
-      ;; in the visible area of the tab bar.
-      (if tabbar-auto-scroll-flag
-          label
-        (tabbar-shorten
-         label (max 1 (/ (window-width)
-                         (length (tabbar-view
-                                  (tabbar-current-tabset)))))))))
-  (tabbar-mode t))
-
 
 ;; Keybinding hints
 (use-package which-key
